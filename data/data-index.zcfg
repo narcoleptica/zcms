@@ -1,0 +1,5 @@
+
+%%data-config%%="data"
+%data-path% = "/data"
+
+load "%data-path%/tracking/tracking.zcfg"

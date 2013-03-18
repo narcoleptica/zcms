@@ -1,0 +1,238 @@
+<html>
+
+
+<body>
+
+Коды состояния разделяются на классы, каждый из которых начинается с новой сотни:
+<ul>
+	<li><b>100—199</b> — информационные коды состояния, сообщающие клиенту, что сервер пребывает в процессе обработки запроса. Реакция клиента на данные коды не требуется;</li>
+	<li><b>200—299</b> — коды успешного выполнения запроса. Получение данного кода ответа на запрос означает, что запрос успешно выполнен и в теле присланного документа находится запрашиваемый документ, который можно передать пользователю;</li>
+	<li><b>300—399</b> — коды переадресации, предназначенные для уведомления клиента о том, что для завершения запроса необходимо выполнить дальнейшие действия (как правило, перейти по новому адресу);</li>
+	<li><b>400—499</b> — коды ошибочного запроса, отправляемые клиенту, если сервер не может обработать его запрос;</li>
+	<li><b>500—599</b> — коды ошибок сервера, возникающих по вине сервера (как правило, из-за синтаксической ошибки в файле .htaccess).</li>
+</ul>
+
+<b>Информационные HTTP-коды состояния</b>
+<dl>
+	<dt>100 Continue</dt>
+	<dd>Сервер готов получить оставшуюся часть запроса</dd>
+	<dt>101 Switching Protocols</dt>
+	<dd>Сервер готов переключить протокол приложения на протокол, указанный в заголовке запроса Upgrade, предоставленного клиентом. Переключение должно выполняться, только если указанный протокол имеет преимущество над старым, например, клиент может отправить запрос, чтобы сервер использовал вместо текущего более новый протокол HTTP</dd>
+</dl>
+
+<b>HTTP-коды успешного выполнения запроса</b>
+<dl>
+	<dt>200 OK</dt>
+	<dd>Сервер успешно обработал запрос, и клиент может получить запрашиваемый документ в теле ответа</dd>
+	<dt>201 Created Locatuion</dt>
+	<dd>Сервер успешно создал новый URL, заданный в HTTP-заголовке Locatuion</dd>
+	<dt>202 Accepted</dt>
+	<dd>Запрос принят сервером для обработки, но она еще не завершена</dd>
+	<dt>203 Non-Authoritative Information</dt>
+	<dd>Метаинформация в заголовке запроса не связана с данным сервером и скопирована с другого сервера</dd>
+	<dt>204 No Content</dt>
+	<dd>Выполнение запроса завершено, но никакой информации отправлять обратно не требуется. Клиент может продолжать просматривать текущий документ</dd>
+	<dt>205 Reset Content</dt>
+	<dd>Клиент должен сбросить текущий документ. Этот HTTP-заголовок можно использовать для сброса и удаления всех значений полей ввода в HTML-форме</dd>
+	<dt>206 Prtial Content</dt>
+	<dd>Сервер выполнил неполный запрос ресурса методом GET. Этот HTTP-код используется для ответа на запросы, содержащие HTTP-заголовок Range. Сервер отправляет HTTP-заголовок Content-Range, чтобы указать, какой сегмент данных приложен</dd>
+</dl>
+
+<dl>
+	<dt>300 Multiple Choices</dt>
+	<dd>Запрашиваемый ресурс соответствует набору документов. Сервер может отправить информацию о каждом документе с его собственным местоположением и информацией по согласованию содержимого, оставляя выбор на усмотрение клиента</dd>
+	<dt>301 Moved Permanently</dt>
+	<dd>Запрашиваемый ресурс на сервере отсутствует. Для переадресации клиента на новый URL отправляется HTTP-заголовок Locatuion. Все последующие запросы должны отправляться на новый URL</dd>
+	<dt>302 Moved Temporarily</dt>
+	<dd>Запрашиваемый ресурс временно перемещен. Для переадресации клиента на новый URL отправляется HTTP-заголовок Locatuion. В последующих запросах клиент может продолжать использовать старый URL</dd>
+	<dt>303 See Other</dt>
+	<dd>Запрашиваемый ресурс найден в другом месте, его местоположение уточняется сервером при помощи HTTP-заголовка Locatuion</dd>
+	<dt>304 Not Modified</dt>
+	<dd>Сервер использует этот HTTP-код в соответствии с HTTP-заголовком if-Modified-Since. Это означает, что запрашиваеьый документ не модефицировался с даты, определенной в HTTP-заголовке if-Modified-Since</dd>
+	<dt>305 Use Proxy</dt>
+	<dd>Для получения запрашиваемого ресурса клиент должен использовать прокси-сервер, адрес которого определяется сервером в HTTP-заголовке Locatuion</dd>
+	<dt>307 Temporary Redirect</dt>
+	<dd>Запрашиваемый ресурс временно перемещен в другое место. Для переадресации клиента на новый URL отправляется HTTP-заголовке Locatuion</dd>
+</dl>
+
+<b>HTTP-коды ошибочного запроса</b>
+<dl>
+	<dt>400 Bad Request</dt>
+	<dd>В запросе клиента обнаружена синтаксическая ошибка</dd>
+	<dt>401 Unauthorized</dt>
+	<dd>Запрос требует аутентификации клиента. Для уточнения типа аутентификации и области запрашиваемого ресурса сервер отправляет HTTP-заголовок WWW-Authentificate</dd>
+	<dt>402 Payment Required</dt>
+	<dd>Данный HTTP-код зарезервирован для будущего использования в электронной коммерции</dd>
+	<dt>403 Forbidden</dt>
+	<dd>Доступ к запрашиваемому ресурсу запрещен. Клиент не должен повторять запрос</dd>
+	<dt>404 Not Found</dt>
+	<dd>Запрашиваемый документ отсутствует на сервере</dd>
+	<dt>405 Method Not Allowed</dt>
+	<dd>Метод запроса, используемый клиентом, неприемлем. Сервер отправляет HTTP-заголовок Allow, в котором уточняются допустимые методы для получения доступа к запрашиваемому ресурсу</dd>
+	<dt>406 Not Acceptable</dt>
+	<dd>Запрашиваемый ресурс недоступен в том формате, который может принимать клиент (клиент обычно уточняет эти форматы в специальном HTTP-заголовке Accept). Если запрос не является запросом HEAD на получение лишь HTTP-заголовков с сервера без тела документа, то сервер может отправить заголовки Content-Language, Content-Encoding, Content-Type, чтобы определить, какие форматы являются доступными</dd>
+	<dt>407 Proxy Authentification Required</dt>
+	<dd>Несанкционированный запрос доступа к прокси-серверу: клиент должен аутентифицировать себя на прокси-сервере. Сервер отправляет HTTP-заголовок Proxy Authentificatе со схемой аутентификации и областью запрашиваемого ресурса</dd>
+	<dt>408 Request Time-Out</dt>
+	<dd>Клиент не завершил свой запрос за время ожидания запроса, заданное серверу,однако можетповторить запрос</dd>
+	<dt>409 Conflict</dt>
+	<dd>Возник конфликт запроса клиента с другим запросом. Вместе скодом состояния сервер может переслать информацию о типе конфликта</dd>
+	<dt>410 Gone</dt>
+	<dd>Запрашиваемый ресурс удаленен с сервера</dd>
+	<dt>411 Length Required</dt>
+	<dd>Клиент должен прислать в запросе HTTP-заголовок Content-Length</dd>
+	<dt>412 Precondition Filed</dt>
+	<dd>Если запрос клиента содежит один или более HTTP-заголовков if ..., сервер использует этот HTTP-код для оповещения, что одно или более условий, заданных в этих заголовках, не выполняются</dd>
+	<dt>413 Request Entity Too Large</dt>
+	<dd>Сервер отказывается выполнять запрос: слишком длинное тело сообщений</dd>
+	<dt>414 Request-URI Too Long</dt>
+	<dd>Сервер отказывается выполнять запрос: слишком длинный URI(URL)</dd>
+	<dt>415 Unsupported Media Type</dt>
+	<dd>Сервер отказывается выполнять запрос: отсутствует поддержка формата тела сообщения</dd>
+	<dt>417 Expectation Failed</dt>
+	<dd>Сервер не смог выполнить требования HTTP-заголовка Expect Request</dd>
+</dl>
+
+<dl>
+	<dt>500 Internal Server Error</dt>
+	<dd>Ошибка конфигурации сервера или внешней программы</dd>
+	<dt>501 Not Implemented</dt>
+	<dd>Сервер не поддерживает функции, требуемые для выполнения запроса</dd>
+	<dt>502 Bad Gateway</dt>
+	<dd>Неверный ответ вышестоящего сервера или прокси сервера</dd>
+	<dt>503 Servise Unavailable</dt>
+	<dd>Служба временно недоступна. С целью оповещения о времени открытия доступа к службе сервер может отправить заголовок Retry-After</dd>
+	<dt>504 Gateway Time-Out</dt>
+	<dd>Шлюз или прокси-сервер временно заблокирован</dd>
+	<dt>505 HTTP Version Not Supported</dt>
+	<dd>Не поддерживается используемая клиентом версия протокола HTTP</dd>
+</dl>
+
+
+<hr>
+
+<b>Все веб-ресурсы разбиваем на:</b>
+<ul>
+	<li>страницы / ресурсы</li>
+	<li>статические / динамические</li>
+</ul>
+
+<dl>
+	<dt>Страница</dt>
+	<dd>это конечный элемент, имеющий URI, который является логической частью сайт</dd>
+	<dt>Ресурсом</dt>
+	<dd>это все что не страница, на пример ее элементы; служебные элементы и т.д.</dd>
+</dl>
+
+<dl>
+	<dt>Статические элементы</dt>
+	<dd>это элементы, кторые не требуют дополнительных "телодвижений сервера" и могут быть выдаными веб-сервером напрямую</dd>
+	<dt>Динамические элементы</dt>
+	<dd>это элементы, кторые собираются сервером налету</dd>
+</dl>
+
+<fieldset>
+	<legend><b>.htaccess</b></legend>
+
+	<i>запрет просматривать <b>.htaccess</b> извне</i>
+	<br>
+	<code>
+		&lt;Files  ".htaccess"&gt;<br>
+			deny from all<br>
+		&lt;/Files&gt;
+	</code>
+	<br><br>
+
+	<i>чувствительность к регистру ссылок</i>
+	<br>
+	<code>
+		Options +FollowSymlinks
+	</code>
+	<br><br>
+
+	<i>перехват явных ошибок</i>
+	<br>
+	<code>
+		ErrorDocument  403  403.php<br>
+		ErrorDocument  404  404.php<br>
+		ErrorDocument  500  500.php
+	</code>
+	<br><br>
+
+	<i>включаем переадресацию</i>
+	<br>
+	<code>
+			RewriteEngine  on<br>
+			RewriteBase  /<br>
+			#RewriteOptions  MaxRedirects=2  # непроверено!!!
+	</code>
+	<br><br>
+
+	<i>классифицируем запрос: ресурс / страница  +  статика / динамика  +  что конкретно</i>
+	<br>
+	<code>
+		RewriteRule  [\.](bmp)([\?]|$)       -  [ENV=zIs:resource,ENV=zState:static,ENV=zType:image]<br>
+		RewriteRule  [\.](gif)([\?]|$)       -  [ENV=zIs:resource,ENV=zState:static,ENV=zType:image]<br>
+		RewriteRule  [\.](jpe?g)([\?]|$)     -  [ENV=zIs:resource,ENV=zState:static,ENV=zType:image]<br>
+		RewriteRule  [\.](png)([\?]|$)       -  [ENV=zIs:resource,ENV=zState:static,ENV=zType:image]<br>
+		RewriteRule  [\.](tif)([\?]|$)       -  [ENV=zIs:resource,ENV=zState:static,ENV=zType:image]<br>
+		RewriteRule  [\.](css)([\?]|$)       -  [ENV=zIs:resource,ENV=zState:static,ENV=zType:css]<br>
+		RewriteRule  [\.](js)([\?]|$)        -  [ENV=zIs:resource,ENV=zState:static,ENV=zType:javascript]<br>
+		RewriteRule  [\.](txt)([\?]|$)       -  [ENV=zIs:resource,ENV=zState:static,ENV=zType:text]<br>
+		RewriteRule  [\.](xml)([\?]|$)       -  [ENV=zIs:resource,ENV=zState:static,ENV=zType:xml]<br>
+		RewriteRule  [\.](s?html?)([\?]|$)   -  [ENV=zIs:layout,ENV=zState:dynamic,ENV=zType:html]<br>
+		RewriteRule  [\.](php[\d]?)([\?]|$)  -  [ENV=zIs:layout,ENV=zState:dynamic,ENV=zType:html]<br>
+		# уточненая классифицируем запрос-страниц<br>
+		RewriteRule  ^[\d]{3}[\.](s?html?|php)([\?]|$)  -  [ENV=zState:static]<br>
+		#RewriteRule  ^a[\.](html)([\?]|$)               -  [ENV=zState:static] # пример исключение!!!
+	</code>
+	<br><br>
+
+	<i>точка входа</i>
+	<br>
+	<code>
+		# resource & static<br>
+		RewriteCond  %{ENV:zIs}          ^(resource)$  [NC]<br>
+		RewriteCond  %{ENV:zState}       ^(static)$    [NC]<br>
+		RewriteCond  %{SCRIPT_FILENAME}  -f<br>
+		RewriteRule  ^(.*)$              -             [L]<br>
+		<br>
+		RewriteCond  %{ENV:zIs}          ^(resource)$  [NC]<br>
+		RewriteCond  %{ENV:zState}       ^(static)$    [NC]<br>
+		RewriteCond  %{SCRIPT_FILENAME}  !-f<br>
+		RewriteRule  ^(.*)$              404.php       [R=301,L]<br>
+		<br>
+		# layout & static<br>
+		RewriteCond  %{ENV:zIs}          ^(layout)$  [NC]<br>
+		RewriteCond  %{ENV:zState}       ^(static)$  [NC]<br>
+		RewriteCond  %{SCRIPT_FILENAME}  -f<br>
+		RewriteRule  ^(.*)$              -           [L]<br>
+		<br>
+		RewriteCond  %{ENV:zIs}          ^(layout)$  [NC]<br>
+		RewriteCond  %{ENV:zState}       ^(static)$  [NC]<br>
+		RewriteCond  %{SCRIPT_FILENAME}  !-f<br>
+		RewriteRule  ^(.*)$              404.php     [R=301,L]<br>
+		<br>
+		# layout & dynamic<br>
+		RewriteCond  %{ENV:zIs}      ^(layout)$           [NC]<br>
+		RewriteCond  %{ENV:zState}   ^(dynamic)$          [NC]<br>
+		RewriteCond  %{SCRIPT_NAME}  !^index.php([\?]|$)  [NC]<br>
+		RewriteRule  ^.*$            index.php            [L,QSA]
+	</code>
+	<br><br>
+
+	<!--
+# а надо ли?!!!
+#RemoveHandler  .shtml
+#AddType  application/x-httpd-php  .shtml
+
+# для подзапросов оставлять данные неизменными (еще надо думать!!!)
+#RewriteRule  ^.*$  -  [ENV=zIs:%{ENV:REDIRECT_zIs},ENV=zState:%{ENV:REDIRECT_zState},ENV=zType:%{ENV:REDIRECT_zType}]
+#RewriteRule  ^.*$  -  [ENV=REDIRECT_zIs:,ENV=REDIRECT_zState:,ENV=REDIRECT_zType:]
+	-->
+</fieldset>
+
+</body>
+
+
+</html>

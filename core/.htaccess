@@ -1,0 +1,12 @@
+<Files ".htaccess">
+	deny from all
+</Files>
+
+
+Options  -Indexes
+Options  +FollowSymlinks
+
+
+RewriteEngine  on
+RewriteBase  /core
+RewriteRule  ^.*$  /core/error-point/404.php  [L,QSA]

@@ -1,0 +1,363 @@
+
+/*ссылка*/
+a { margin: 0px; padding: 0px; }
+	a { background: transparent; }
+	a { border: none; }
+	a { color: #000; }
+	a { cursor: pointer; }
+	a { outline: none; }
+	a { text-decoration: none; }
+	a:link { color: #000; }
+	a:visited { color: #000; }
+	a:hover { color: #000; }
+	a:active { color: #000; }
+/*!!! аббревиатура IE-*/
+abbr {  }
+/*!!! акроним*/
+acronym {  }
+/*хранит информацию об авторе сайта и может включать HTML*/
+address { font-style: itelic; }
+/*определяет активные области изображения, которые являются ссылками*/
+area { margin: 0px; padding: 0px; }
+	area { background: transparent; }
+	area { border: none; }
+	area { color: #000; }
+	area { cursor: pointer; }
+	area { outline: none; }
+	area { text-decoration: none; }
+	area:link { color: #000; }
+	area:visited { color: #000; }
+	area:hover { color: #000; }
+	area:active { color: #000; }
+
+/*жирная толшина шрифта*/
+b { font-weight: bold; }
+/*внутри <HEAD>, указывает корень для относительных адресов и целевое окно*/
+base { }
+/*задает шрифт, размер и цвет текста по умолчанию O-N-S-FF-*/
+basefont { }
+/*устанавливает направление вывода текста*/
+bdo { margin: 0px; padding: 0px; }
+	bdo { direction: inherit; }
+		bdo.l { direction: ltr; }
+		bdo.r { direction: rtl; }
+		bdo.p { direction: inherit; }
+/*определяет музыкальный файл, который будет проигрываться на веб-странице при ее открытии N-S-FF-*/
+bgsound { }
+/*увеличивает размер шрифта на единицу по сравнению с обычным текстом*/
+big { font-size: larger; }
+blockquote { margin: 0px; padding: 0px; }
+/*предназначен для хранения содержания веб-страницы (контента), отображаемого в окне браузера*/
+body { margin: 0px; padding: 0px; }
+	body { background: transparent; }
+	body { color: #000; }
+	body { font-family: Verdana, Tahoma, Arial; font-size: 12pt; font-style: normal; font-variant: normal; font-weight: normal; }
+	body { height: 100%; width: 100%; }
+	body { text-align: justify; vertical-align: baseline; }
+/*!!! устанавливает перевод строки в том месте, где этот тег находится*/
+br {  }
+/*кнопка*/
+button { margin: 0px; padding: 0px; } /*IE?*/
+	button { font-family: "Courier New", Fixedsys, mono; font-size: smaller; font-style: normal; font-variant: normal; font-weight: normal; }
+	button { outline: none; }
+	button { vertical-align: middle; }
+	button:focus {  }
+		button.down, button.up { background: #FFF; }
+		button.down, button.up { border-color: #CCC; border-style: solid; border-width: 1px; }
+		button.down, button.up.pressed { border-left-color: #999; border-top-color: #999; }
+		button.up, button.down.pressed { border-bottom-color: #999; border-right-color: #999; }
+		button.down, button.up { color: #000; }
+
+/*предназначен для создания заголовка к таблице*/
+caption { text-align: center; vertical-align: top; }
+/*выравнивает содержимое контейнера по центру относительно родительского элемента*/
+center { text-align: center }
+/*помечает текст как цитату или сноску на другой материал*/
+cite { font-style: italic; }
+/*предназначен для отображения одной или нескольких строк текста, который представляет собой программный код*/
+code { margin: 0px; padding: 0px; }
+	code { display: block; }
+	code { font-family: "Courier New", Fixedsys, mono; }
+	code { white-space: pre; }
+/*!!! задает ширину и другие атрибуты одной или нескольких колонок таблицы*/
+col {  }
+/*!!! предназначен для задания ширины и стиля одной или нескольких колонок таблицы*/
+colgroup {  }
+
+/*предназначенн для создания списка определений*/
+dd { display: block; position: relative; }
+	dd { text-align: justify; }
+		dd.c { text-align: center; }
+		dd.j { text-align: justify; }
+		dd.l { text-align: left; }
+		dd.r { text-align: right; }
+/*выделяет текст, который был удален*/
+del { text-decoration: line-through; }
+/*новый термин*/
+dfn { font-style: italic; }
+div { margin: 0px; padding: 0px; }
+	div { background: transparent; }
+	div { border: none; }
+	div { display: block; position: relative; }
+/*предназначенн для создания списка определений*/
+dl { margin: 0px; padding: 0px; }
+		dl { position: relative; }
+		dl.form { clear: both; }
+		dl.form > br { clear: both; }
+		dl.form > dd { margin-bottom: 8px; margin-left: 128px; text-align: left; }
+		dl.form > dt { clear: both; float: left; overflow: hidden; text-align: right; width: 128px; }
+		/** /
+		dl.form > dd { margin: -21px 0px 0px 128px; min-height: 20px; overflow: hidden; }
+		dl.form > dt { height: 20px; margin: 1px 0px; overflow: hidden; width: 128px; }
+		/**/
+/*предназначенн для создания списка определений*/
+dt { display: block; position: relative; }
+	dt { text-align: left; }
+		dt.c { text-align: center; }
+		dt.j { text-align: justify; }
+		dt.l { text-align: left; }
+		dt.r { text-align: right; }
+
+/*предназначен для акцентирования текста*/
+em { font-style: italic; }
+/*используется для загрузки и отображения объектов*/
+embed { margin: 0px; padding: 0px; }
+
+/*предназначен для группирования элементов формы*/
+fieldset { margin: 0px; }
+	fieldset { display: block; }
+		fieldset.groupbox > legend { padding: 0px 8px; }
+/*!!! изменяет характеристик шрифта, такие как размер, цвет и гарнитура*/
+font {  }
+/*устанавливает форму на веб-странице*/
+form { margin: 0px; padding: 0px; }
+	form { display: block; }
+	form { position: relative; }
+/*определяет свойства отдельного фрейма*/
+frame { margin: 0px; padding: 0px; }
+	frame { background: transparent; }
+	frame { border: none; }
+/*определяет структуру фреймов на веб-странице*/
+frameset { margin: 0px; padding: 0px; }
+	frameset { background: transparent; border: none; }
+
+/*заголовки разного уровня, которые показывают относительную важность секции, расположенной после заголовка*/
+h1, h2, h3, h4, h5, h6 { margin: 0px; padding: 0px; }
+	h1, h2, h3, h4, h5, h6 { font-style: normal; font-variant: normal; font-weight: normal; }
+	h1, h2, h3, h4, h5, h6 { display: inline; }
+/*предназначен для хранения других элементов*/
+head { }
+/*горизонтальная линия*/
+hr { margin: 0px; padding: 0px; }
+	hr { display: block; }
+	hr { height: 1px; }
+	hr { overflow: hidden; }
+		hr.line { border: none; border-top: 1px dotted #CCF; }
+		hr.hline { border: none; border-top: 1px solid #CCF; }
+		hr.fieldset { border: none; border-top: 1px groove; }
+/*является контейнером, который заключает в себе все содержимое веб-страницы*/
+html { height: 100%; width: 100%; }
+
+/*курсивное начертание шрифта*/
+i { font-style: italic; }
+/*плавающий фрейм*/
+iframe { margin: 0px; padding: 0px; }
+	iframe { background: transparent; }
+	iframe { border: none; }
+	iframe { display: none; }
+		iframe.hide { display: none; }
+		iframe.show { display: block; height: 128px; }
+/*изображение в графическом формате GIF, JPEG или PNG*/
+img { margin: 0px; padding: 0px; }
+	img { background: none; border: none; vertical-align: middle; }
+		img.text { vertical-align: baseline; }
+		img.icon { height: 16px; width: 16px; }
+		img.icon.big { height: 24px; width: 24px; }
+		img.icon.selected { /** /border: 1px solid red;/**/ background: red; }
+/*создание текстовых полей, различных кнопок, переключателей и флажков*/
+input { margin: 0px; padding: 0px; }
+	input { font-family: "Courier New", Fixedsys, mono; font-size: smaller; font-style: normal; font-variant: normal; font-weight: normal; }
+	input { vertical-align: middle; }
+	input:focus {  }
+		input.check, input.radio { background: transparent; }
+		input.counter, input.down, input.file, input.up { background: #FFF; }
+		input.check, input.radio { border: none; }
+		input.counter, input.down, input.file, input.up { border-color: #CCC; border-style: solid; border-width: 1px; }
+		input.counter, input.down, input.up.pressed { border-left-color: #999; border-top-color: #999; }
+		input.up, input.down.pressed { border-bottom-color: #999; border-right-color: #999; }
+		input.counter, input.down, input.file, input.image, input.up { color: #000; }
+		input.counter, input.down { cursor: text; }
+		input.check, input.file, input.image, input.radio, input.up { cursor: pointer; }
+		input.counter { margin: 1px 0px; padding: 1px; width: 6em; }
+		input.counter { text-align: right; }
+		input.down { text-align: left; }
+		input.file { text-align: left; }
+		input.up { text-align: center; }
+/*выделяет текст, который был добавлен*/
+ins { text-decoration: underline; }
+
+/*обозначенят текст, который набирается на клавиатуре или для названия клавиш*/
+kbd { font-size: larger; font-weight: bolder; }
+
+/*устанавливает связь между определенной меткой, в качестве которой обычно выступает текст, и элементом формы*/
+label { cursor: pointer; white-space: nowrap; }
+/*применяется для создания заголовка группы элементов формы*/
+legend { text-align: center; font-weight: bolder; }
+/*!!! определяет отдельный элемент списка*/
+li { margin-left: 16px; }
+/*устанавливает связь с внешним документом вроде файла со стилями или со шрифтами*/
+link { }
+
+/*служит контейнером для элементов <AREA>, которые определяют активные области для карт-изображений*/
+map { }
+/*!!! создает бегущую строку на странице*/
+marquee {  }
+/*определяет метатеги, которые используются для хранения информации предназначенной для браузеров и поисковых систем*/
+meta { }
+
+/*уведомляет браузер отображать текст без переносов*/
+nobr { }
+/*!!! предназначен для отображения информации на веб-странице, если браузер не поддерживает работу с плагинами*/
+noembed {  }
+/*отображается в браузере, когда он не поддерживает фреймы и не умеет их интерпретировать*/
+noframes { }
+/*!!! показывает свое содержимое, если браузер не поддерживает работу со скриптами или их поддержка отключена пользователем*/
+noscript {  }
+
+/*!!! сообщает браузеру, как загружать и отображать объекты, которые исходно браузер не понимает*/
+object {  }
+/*устанавливает нумерованный список*/
+ol { margin: 0px; padding: 0px; }
+	ol { list-style-type: decimal; }
+/*представляет собой контейнер, внутри которого располагаются теги <OPTION> объединенные в одну группу*/
+optgroup { margin: 0px; padding: 0px; }
+	optgroup { background: inherit; }
+	optgroup { border: none; }
+	optgroup { color: #CCC; }
+	optgroup { cursor: inherit; }
+	optgroup { font-family: inherit; font-size: inherit; font-style: itelic; font-variant: inherit; font-weight: normal; }
+/*определяет отдельные пункты списка, создаваемого с помощью контейнера <SELECT>*/
+option { margin: 0px; padding: 0px; }
+	option { background: inherit; }
+	option { border: none; }
+	option { color: #000; }
+	option { cursor: inherit; }
+	option { font-family: inherit; font-size: inherit; font-style: normal; font-variant: inherit; font-weight: normal; }
+
+/*текстовый параграф*/
+p { margin: 0px; padding: 0px; }
+	p { text-align: justify; }
+/*предназначен для передачи значений параметров Java-апплетам или объектам веб-страницы, созданным с помощью тегов <APPLET> или <OBJECT>*/
+param { }
+/*определяет блок предварительно форматированного текста*/
+pre { margin: 0px; padding: 0px; }
+	pre { font-family: "Courier New", Fixedsys, mono; }
+	pre { white-space: pre; }
+
+/*используется для выделения в тексте цитат IE?*/
+q { font-style: italic; }
+
+/*отображает текст как перечеркнутый*/
+s { text-decoration: line-through; }
+/*используется для отображения текста, который является результатом вывода компьютерной программы или скрипта*/
+samp { margin: 0px; padding: 0px; }
+	samp { display: block; }
+	samp { font-family: "Courier New", Fixedsys, mono; }
+	samp { white-space: nowrap; }
+/*предназначен для описания скриптов, может содержать ссылку на программу или ее текст на определенном языке*/
+script { }
+/*позволяет создать элемент интерфейса в виде раскрывающегося списка, а также список с одним или множественным выбором*/
+select { margin: 0px; padding: 0px; }
+	select { font-family: "Courier New", Fixedsys, mono; font-size: smaller; font-style: normal; font-variant: normal; font-weight: normal; }
+	select { vertical-align: middle; }
+	select:focus {  }
+		select.down { background: #FFF;  }
+		select.down { border-color: #CCC; border-style: solid; border-width: 1px; }
+		select.down { border-left-color: #999; border-top-color: #999; }
+		select.down { color: #000; }
+		select.down { cursor: pointer; }
+		select.down { padding: 1px; }
+/*уменьшает размер шрифта на единицу по сравнению с обычным текстом*/
+small { font-size: smaller; }
+/*предназначен для определения встроенных элементов документа*/
+span { margin: 0px; padding: 0px; }
+/*отображает текст как перечеркнутый*/
+strike { text-decoration: line-through; }
+/*предназначен для акцентирования текста*/
+strong { font-weight: bold; }
+/*применяется для определения стилей элементов веб-страницы*/
+style { }
+/*отображает шрифт в виде нижнего индекса*/
+sub { vertical-align: sub; }
+/*отображает шрифт в виде верхнего индекса*/
+sup { vertical-align: super; }
+
+/*представляет собой элемент формы для создания области, в которую можно вводить несколько строк текста*/
+textarea { margin: 0px; padding: 0px; }
+	textarea { font-family: "Courier New", Fixedsys, mono; font-size: smaller; font-style: normal; font-variant: normal; font-weight: normal; }
+	textarea { vertical-align: middle; }
+	textarea:focus {  }
+		textarea.down, textarea.up { background: #FFF; }
+		textarea.down, textarea.up { border-color: #CCC; border-style: solid; border-width: 1px; }
+		textarea.down { border-left-color: #999; border-top-color: #999; }
+		textarea.up { border-bottom-color: #999; border-right-color: #999; }
+		textarea.down, textarea.up { color: #000; }
+		textarea.down { cursor: text; }
+		textarea.up { cursor: pointer; }
+		textarea.down { height: 128px; }
+		textarea.down { text-align: justify; }
+		textarea.up { text-align: center; }
+/*определяет заголовок документа*/
+title { }
+/*отображает текст моноширинным текстом*/
+tt { font-family: "Courier New", Fixedsys, mono; }
+/*служит контейнером для элементов, определяющих содержимое таблицы*/
+table { margin: 0px; padding: 0px; }
+	table { background: transparent; }
+	table { border: none; border-collapse: collapse; border-spacing: 0px; }
+	table { table-layout: auto; }
+	table { text-align: justify; }
+		table.b { border-color: #CCC; border-style: solid; border-width: 1px; }
+		table.s { border-collapse: separate; border-spacing: 1px; }
+		table.f { overflow: hidden; }
+		table.f { table-layout: fixed; }
+/*thead предназначен для хранения одной или нескольких строк, которые представлены вверху таблицы*/
+/*tbody предназначен для хранения одной или нескольких строк таблицы*/
+/*tfoot предназначен для хранения одной или нескольких строк, которые представлены внизу таблицы*/
+thead, tbody, tfoot { margin: 0px; padding: 0px; }
+	thead, tbody, tfoot { background: inherit; }
+	thead, tbody, tfoot { border-color: inherit; border-style: inherit; border-width: inherit; }
+	thead, tbody, tfoot { overflow: inherit; }
+	thead, tbody, tfoot { text-align: inherit; }
+	thead, tbody, tfoot { vertical-align: middle; }
+/*tr строка таблицы*/
+/*th предназначен для создания одной ячейки таблицы, которая обозначается как заголовочная*/
+/*td ячейка таблицы*/
+tr, th, td { margin: 0px; padding: 0px; }
+	tr, th, td { background: inherit; }
+	tr, th, td { border-color: inherit; border-style: inherit; border-width: inherit; }
+	tr, th, td { overflow: inherit; }
+	tr, th, td { text-align: inherit; }
+	tr, th, td { vertical-align: middle; }
+		tr.c, th.c, td.c { text-align: center; }
+		tr.j, th.j, td.j { text-align: justify; }
+		tr.l, th.l, td.l { text-align: left; }
+		tr.r, th.r, td.r { text-align: right; }
+		tr.panel { background: #C6C6C6; }
+		tr.panel a { color: blue; }
+		td.p { padding: 2px 0px; }
+
+/*устанавливает маркированный список*/
+ul { margin: 0px; padding: 0px; }
+	ul { list-style-type: disc; }
+
+/*используется для выделения переменных компьютерных программ*/
+var { font-style: italic; }
+
+/*!!! При использовании тега <NOBR>, который запрещает переносы текста, с помощью тега <WBR> можно указать браузеру место, где допускается делать перенос строки, если этого требует ширина родительского элемента*/
+wbr {  }
+
+/*отображает содержимое контейнера «как есть» и шрифтом фиксированной ширины*/
+xmp { margin: 0px; padding: 0px; }
+	xmp { display: block; white-space: pre; }
+	xmp { font-family: "Courier New", Fixedsys, mono; }

@@ -1,0 +1,6 @@
+
+%%core-config%%="lib"
+%core-path% = "/core/lib"
+
+load "%core-path%/location/location.zcfg"
+load "%core-path%/mysql/mysql.zcfg"

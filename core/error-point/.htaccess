@@ -1,0 +1,13 @@
+<Files ".htaccess">
+	deny from all
+</Files>
+
+
+Options  -Indexes
+Options  +FollowSymlinks
+
+
+RewriteEngine  on
+RewriteBase  /core/error-point/
+RewriteRule  ^(?:403|404|500)[\.]php([\?]|$)  -              [L]  # 403.php, 404.php, 500.php
+RewriteRule  ^(?:403|404|500)[\.]php([\?]|$)  404.php  [L,QSA]

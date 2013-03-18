@@ -1,0 +1,41 @@
+div#document-content-wrapper
+{
+	background-color: #F9F9F9;
+	margin: 0 auto;
+	max-width: 1600px;
+	min-height: 1px;
+	min-width: 800px;
+}
+div#document-content-wrapper, div#document-content-wrapper  * { font: normal 12pt Verdana, Tahoma, "Courier New"; }
+
+/* pages */
+div.pages-bar { clear: both; margin: 16px 0 0; }
+div.pages-bar  div.pages { float: left; }
+div.pages-bar  div.goto { float: right; }
+div.pages  a.link, div.pages  span.current, div.pages  span.delimiter { padding: 2px 8px; vertical-align: middle; }
+div.pages  a.link { border: 1px #EEE solid; color: gray; }
+div.pages  span.current { border: 1px #EEE green; color: green; }
+div.pages  span.delimiter { color: gray; margin: 0px 8px; }
+/* end pages */
+
+/* img */
+img.state { height: 24px; width: 24px; }
+img.icon { cursor: pointer; height: 32px; width: 32px; }
+/* end img */
+
+/* color-x */
+.color-0 { background-color: #FFF; color: #000; }
+.color-1 { background-color: #EEE; color: #333; }
+/* end color-x */
+
+/* loading */
+div.loading { background: url('/resource/loading.gif') no-repeat center center; height: 64px; overflow: hidden; }
+/* end loading */
+
+/* colunms */
+div.columns { position: relative; }
+div.columns  div.lcolumn { float: left; height: 100%; }
+div.columns  div.rcolumn { float: right; height: 100%; }
+div.columns  div.column { height: 100%; }
+div.columns  div.clear { clear: both; height: 1px; margin-bottom: -1px; overflow: hidden; }
+/* end colunms */

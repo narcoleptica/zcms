@@ -1,0 +1,74 @@
+
+<!-- BEGIN: index -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" >
+	<meta name="description" content="{DATA.description}" >
+	<meta name="keywords" content="{DATA.keywords}" >
+	<meta name="revisit-after" content="1 day" >
+	<title>{DATA.title}</title>
+
+	<link type="text/css" rel="stylesheet" href="/resource/.styles/styles.css" >
+	<!--[if IE]>
+	<link type="text/css" rel="stylesheet" href="/resource/.styles/styles-IE.css" >
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="/resource/.hover/style-hover.css" >
+	<link type="text/css" rel="stylesheet" href="/resource/.spoiler/style-spoiler.css" >
+	<link type="text/css" rel="stylesheet" href="/resource/index.css" >
+	<!--[if IE]>
+	<link type="text/css" rel="stylesheet" href="/resource/index-IE.css" >
+	<![endif]-->
+
+	<script type="text/javascript" language="JavaScript" src="/resource/scripts-trace.js"></script>
+	<script type="text/javascript" language="JavaScript" src="/resource/.ajax/ajax.js"></script>
+	<script type="text/javascript" language="JavaScript" src="/resource/.timer/timer.js"></script>
+	<script type="text/javascript" language="JavaScript" src="/resource/index.js"></script>
+</head>
+
+
+<body>
+	<noscript> JavaScript is off !!! </noscript>
+	<div id="document-content-wrapper">{DATA.content}</div>
+</body>
+
+
+<!--[if IE]>
+<script type="text/javascript" language="JavaScript" src="/resource/.hover/script-IE-hover.js"></script>
+<![endif]-->
+<script type="text/javascript" language="JavaScript" src="/resource/.spoiler/script-spoiler.js"></script>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+	document.user = { module: '{DATA.module}' };
+	loadContent([['ajax', '{DATA.module}'], ['do', 'rows']]);
+//-->
+</script>
+
+
+</html>
+<!-- END: index -->
+
+
+<!-- BEGIN: pages -->
+<div class="pages-bar">
+	<div class="pages">
+	<!-- BEGIN: page -->
+		<!-- BEGIN: link --><a class="link" href="javascript:goToPage('{module}', this.rel);" rel="{value}" onclick="return goToPage('{module}', this.rel);">{title}</a><!-- END: link -->
+		<!-- BEGIN: current --><span class="current">{title}</span><!-- END: current -->
+		<!-- BEGIN: delimiter --><span class="delimiter">...</span><!-- END: delimiter -->
+	<!-- END: page -->
+	</div>
+	<!-- BEGIN: goto -->
+	<div class="goto">
+		<form method="get" action="" onsubmit="try { goToPage(this.p.value, '{module}'); } catch (e) { } return false;">
+			<input type="text" name="p" size="4" value="{value}" autocomplete="off" />
+			<input type="submit" value="перейти на ..." />
+		</form>
+	</div>
+	<!-- END: goto -->
+</div>
+<!-- END: pages -->
+

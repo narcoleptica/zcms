@@ -1,0 +1,16 @@
+
+# конфигурация служебной области
+%%core-path%% = "/core"
+%%core-path-enter-point%% = "%core-path%/enter-point"
+%%core-path-error-point%% = "%core-path%/error-point"
+%%core-path-kernel%% = "%core-path%/kernel"
+%%core-path-library%% = "%core-path%/lib"
+
+# конфигурация общей области
+%%data-path%% = "/data"
+
+%%core-config-library%%="lib"
+%%core-config-classes%%="lib"
+
+load "%core-path%/location/location.zcfg"
+load "%core-path%/mysql/mysql.zcfg"

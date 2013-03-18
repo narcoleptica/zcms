@@ -1,0 +1,657 @@
+
+<!-- BEGIN: shipment -->
+<div class="shipment">
+<!-- BEGIN: data -->
+	<style type="text/css">	
+		div.shipment {  }
+		div.shipment  div.rows {  }
+		div.rows  div.row { overflow: hidden; }
+		
+		/* table.row */
+		div.row  table.row { border-collapse: collapse; border-spacing: 0px; table-layout: fixed; width: 100%; }
+		table.row  table.row { height: 100%; }
+		table.row  tr.panel { background: #999 !important; color: #FFF; }
+		table.row  td { border: 0px #000 solid; color: #000; }
+		table.row  td { margin: 0px; overflow: hidden; padding: 0px; verlical-align: middle; }
+		/**/
+		table.row  td.state { text-align: center; width: 24px; }
+		table.row  td.code { padding: 0 4px; text-align: right; width: 256px; }
+		table.row  td.created { padding: 0 4px; text-align: center; width: 96px; }
+		table.row  td.history { text-align: center; width: 72px; }
+		table.row  td.sender-receiver { text-align: center; }
+		table.row  td.sender { padding: 0 4px; text-align: left; width: 50%; }
+		table.row  td.sender.company { text-align: left; width: 25%; }
+		table.row  td.sender.city { text-align: left; width: 25%; }
+		table.row  td.receiver { padding: 0 4px; text-align: left; width: 50%; }
+		table.row  td.receiver.contry { text-align: left; width: 25%; }
+		table.row  td.receiver.city { text-align: left; width: 25%; }
+		table.row  td.action { text-align: center; width: 72px; }
+		/* end table.row */
+
+		/**/
+		dl.keyValue { margin: 0; padding: 0; }
+		dl.keyValue  dt
+		{
+			/** /border: 1px red solid;/**/
+			clear: both;
+			float: left;
+			margin: 0;
+			margin-right: 8px;
+			padding: 0;
+			text-align: right;
+		}
+		dl.keyValue  dd
+		{
+			/** /border: 1px red solid;/**/
+			float: left;
+			margin: 0;
+			padding: 0;
+		}
+		dl.keyValue.w64  dt { width: 64px; }
+		dl.keyValue.w128  dt { width: 128px; }
+		dl.keyValue.w200  dt { width: 200px; }
+		div.hint { color: gray; font-size: x-small; }
+		input.counter { text-align: right; width: 64px; }
+		hr.clear { clear: both; visibility: hidden; }
+	</style>	
+	<script type="text/javascript">
+	<!--
+		var setFields = function (Id, data)
+		{
+			try
+			{
+				var o = $(Id);
+				for (d in data)
+				{
+					if ((typeof data[d] === 'function') || (data[d] instanceof Function))
+					{
+						var f = data[d];
+						o[d] = f;
+					}
+					else o[d] = data[d];
+				}
+			}
+			catch (e) { alert(e); }
+		};
+	//-->
+	</script>
+	<script type="text/javascript">
+	<!--
+		//if (!(typeof document.user === 'object') || !document.user || !(document.user instanceof Object)) document.user = { };
+		var shipments = { };
+		document.user.s = shipments;
+		shipments.states = 
+		{
+			canceled: { className: 'state', src: '/resource/icon/state-canceled.png', title: 'Отменен' },
+			none: { className: 'state', src: '/resource/icon/state-none.png', title: '?' },
+			queried: { className: 'state', src: '/resource/icon/state-queried.png', title: 'В очедеди' },
+			opened: { className: 'state', src: '/resource/icon/state-opened.png', title: 'Готов к выполению' },
+			moving: { className: 'state', src: '/resource/icon/state-moving.png', title: 'В работе' },
+			done: { className: 'state', src: '/resource/icon/state-done.png', title: 'Выполнен' }
+		};
+		shipments.rows = { },
+		shipments.row =
+		{
+			state: { className: 'state' },
+			code: { className: 'code' },
+			created: { className: 'created' },
+			history: { className: 'history' },
+			'history-list':
+			{
+				className: 'icon',
+				src: '/resource/icon/shipment-history-list.png',
+				title: 'Смотреть историю',
+				onclick: function onclick (event) { return shipments.formHistoryList(this.alt); }
+			},
+			'history-add':
+			{
+				className: 'icon',
+				src: '/resource/icon/shipment-history-add.png',
+				title: 'Добавить историю',
+				onclick: function onclick (event) { return shipments.formHistoryAdd(this.alt); }
+			},
+			'history-delete':
+			{
+				className: 'icon',
+				src: '/resource/icon/shipment-history-delete.png',
+				title: 'Удалить историю',
+				onclick: function onclick (event) { return shipments.formHistoryDelete(this.rel); }
+			},
+			'history-edit':
+			{
+				className: 'icon',
+				src: '/resource/icon/shipment-history-edit.png',
+				title: 'Редактировать историю',
+				onclick: function onclick (event) { return shipments.formHistoryEdit(this.rel); }
+			},
+			'sender-receiver': { className: 'sender-receiver' },
+			sender: { className: 'sender' },
+			receiver: { className: 'receiver' },
+			'sender-company': { className: 'sender company' },
+			'sender-city': { className: 'sender city' },
+			'receiver-contry': { className: 'receiver contry' },
+			'receiver-city': { className: 'receiver city' },
+			action: { className: 'action' },
+			'action-viewing': { onclick: function (event) { return shipments.formView(this.rel); } },
+			'action-add':
+			{
+				className: 'icon',
+				src: '/resource/icon/shipment-add.png',
+				title: 'Добавить',
+				onclick: function onclick (event) { return shipments.formAdd(this.alt); }
+			},
+			'action-delete':
+			{
+				className: 'icon',
+				src: '/resource/icon/shipment-delete.png',
+				title: 'Удалить',
+				onclick: function onclick (event) { return shipments.formDelete(this.alt); }
+			},
+			'action-edit':
+			{
+				className: 'icon',
+				src: '/resource/icon/shipment-edit.png',
+				title: 'Редактировать',
+				onclick: function onclick (event) { return shipments.formEdit(this.alt); }
+			}
+		};
+	//-->
+	</script>
+	<script type="text/javascript">
+	<!--
+		shipments.formView = function (Id) { alert('shipment-form-' + Id + '-view'); }
+		shipments.formAdd = function (Id)
+		{
+			try
+			{
+				var w = 'shipment-form-' + Id + '-add';
+				w = $(w);
+				if ('ajax' in w)
+				{
+					if ($.hidden(w))
+					{
+						$.show(w);
+					}
+					else
+					{
+						$.hide(w);
+					}
+				}
+				else
+				{
+					w.ajax = 'add';
+					$.show(w, { stop: function () { loadZ(w, [['ajax', document.user.module], ['do', 'shipment-form-add'], ['id', Id]]); } });
+				}
+			}
+			catch (e) { alert('shipments.formAdd: ' + e); }
+		}
+		shipments.formDelete = function (Id) { alert('shipment-form-' + Id + '-delete'); }
+		shipments.formEdit = function (Id) { alert('shipment-form-' + Id + '-edit'); }
+		shipments.formHistoryList = function (Id) { alert('shipment-history-form-' + Id + '-list'); }
+		shipments.formHistoryAdd = function (Id) { alert('shipment-history-form-' + Id + '-add'); }
+		shipments.formHistoryDelete = function (Id) { alert('shipment-history-form-' + Id + '-delete'); }
+		shipments.formHistoryEdit = function (Id) { alert('shipment-history-form-' + Id + '-edit'); }
+	//-->
+	</script>
+<!-- BEGIN: row_all -->
+	<div class="rows">
+		<div id="shipment-form-0-add"></div>
+		<script type="text/javascript">
+		<!--
+			$.hide('shipment-form-0-add', { stop: false, axes: 'Y' });
+		//-->
+		</script>
+		<div class="row" id="shipment-row-0">
+			<table class="row">
+				<tr class="panel">
+					<td id="shipment-row-0-state">&nbsp;</td>
+					<td id="shipment-row-0-code">№</td>
+					<td id="shipment-row-0-created">Дата</td>
+					<td id="shipment-row-0-history"></td>
+					<td id="shipment-row-0-sender-receiver">
+						<table class="row">
+							<tr>
+								<td id="shipment-row-0-sender">Отправитель</td>
+								<td id="shipment-row-0-receiver">Получатель</td>
+							</tr>
+						</table>
+						<table class="row">
+							<tr>
+								<td id="shipment-row-0-sender-company">компания</td>
+								<td id="shipment-row-0-sender-city">город</td>
+								<td id="shipment-row-0-receiver-contry">страна</td>
+								<td id="shipment-row-0-receiver-city">город</td>
+							</tr>
+						</table>
+					</td>
+					<td id="shipment-row-0-action">
+						<img id="shipment-row-0-action-add" src="/resource/empty.gif" alt="0" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		<script type="text/javascript">
+		<!--
+			setFields('shipment-row-0-state', shipments.row['state']);
+			setFields('shipment-row-0-code', shipments.row['code']);
+			setFields('shipment-row-0-created', shipments.row['created']);
+			setFields('shipment-row-0-history', shipments.row['history']);
+			setFields('shipment-row-0-sender-receiver', shipments.row['sender-receiver']);
+			setFields('shipment-row-0-sender', shipments.row['sender']);
+			setFields('shipment-row-0-receiver', shipments.row['receiver']);
+			setFields('shipment-row-0-sender-company', shipments.row['sender-company']);
+			setFields('shipment-row-0-sender-city', shipments.row['sender-city']);
+			setFields('shipment-row-0-receiver-contry', shipments.row['receiver-contry']);
+			setFields('shipment-row-0-receiver-city', shipments.row['receiver-city']);
+			setFields('shipment-row-0-action', shipments.row['action']);
+			//
+			setFields('shipment-row-0-action-add', shipments.row['action-add']);
+		//-->
+		</script>
+<!-- BEGIN: row_one -->
+		<div class="row color-{D.color} hover" id="shipment-row-{D.id}">
+			<table class="row hover" rel="{D.id}">
+				<tr>
+					<td id="shipment-row-{D.id}-state">
+						<img id="shipment-row-{D.id}-state-image" src="/resource/empty.gif" alt="" />
+					</td>
+					<td id="shipment-row-{D.id}-code"><span title="{D.id}">{D.code}</span></td>
+					<td id="shipment-row-{D.id}-created"><span title="{D.created_time}">{D.created_date}</span></td>
+					<td id="shipment-row-{D.id}-history">
+						<img id="shipment-row-{D.id}-history-add" src="/resource/empty.gif" alt="{D.id}" />
+						<img id="shipment-row-{D.id}-history-list" src="/resource/empty.gif" alt="{D.id}" />
+					</td>
+					<td id="shipment-row-{D.id}-sender-receiver" onclick="return user.s.formView(this.parentNode.rel);">
+						<table class="row">
+							<tr>
+								<td id="shipment-row-{D.id}-sender-company">{D.sender_company}</td>
+								<td id="shipment-row-{D.id}-sender-city">{D.sender_city}</td>
+								<td id="shipment-row-{D.id}-receiver-contry">{D.receiver_contry}</td>
+								<td id="shipment-row-{D.id}-receiver-city">{D.receiver_city}</td>
+							</tr>
+						</table>
+					</td>
+					<td id="shipment-row-{D.id}-action">
+						<img id="shipment-row-{D.id}-action-edit" src="/resource/empty.gif" alt="{D.id}" /></a>
+						<img id="shipment-row-{D.id}-action-delete" src="/resource/empty.gif" alt="{D.id}" /></a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<script type="text/javascript">
+		<!--
+			setFields('shipment-row-{D.id}-state', shipments.row['state']);
+			setFields('shipment-row-{D.id}-code', shipments.row['code']);
+			setFields('shipment-row-{D.id}-created', shipments.row['created']);
+			setFields('shipment-row-{D.id}-history', shipments.row['history']);
+			setFields('shipment-row-{D.id}-sender-receiver', shipments.row['sender-receiver']);
+			//setFields('shipment-row-{D.id}-sender', shipments.row['sender']);
+			//setFields('shipment-row-{D.id}-receiver', shipments.row['receiver']);
+			setFields('shipment-row-{D.id}-sender-company', shipments.row['sender-company']);
+			setFields('shipment-row-{D.id}-sender-city', shipments.row['sender-city']);
+			setFields('shipment-row-{D.id}-receiver-contry', shipments.row['receiver-contry']);
+			setFields('shipment-row-{D.id}-receiver-city', shipments.row['receiver-city']);
+			setFields('shipment-row-{D.id}-action', shipments.row['action']);
+			//
+			setFields('shipment-row-{D.id}-state-image', shipments.states['{D.state}']);
+			setFields('shipment-row-{D.id}-history-list', shipments.row['history-list']);
+			setFields('shipment-row-{D.id}-history-add', shipments.row['history-add']);
+			setFields('shipment-row-{D.id}-action-delete', shipments.row['action-delete']);
+			setFields('shipment-row-{D.id}-action-edit', shipments.row['action-edit']);
+		//-->
+		</script>
+		<div id="shipment-form-{D.id}-view"></div>
+		<div id="shipment-form-{D.id}-edit"></div>
+		<div id="shipment-form-{D.id}-history-add"></div>
+		<div id="shipment-form-{D.id}-history-list"></div>
+		<script type="text/javascript">
+		<!--
+			$.hide('shipment-form-{D.id}-view', { stop: false, axes: 'Y' });
+			$.hide('shipment-form-{D.id}-edit', { stop: false, axes: 'Y' });
+			$.hide('shipment-form-{D.id}-history-add', { stop: false, axes: 'Y' });
+			$.hide('shipment-form-{D.id}-history-list', { stop: false, axes: 'Y' });
+		//-->
+		</script>
+<!-- END: row_one -->
+	</div>
+<!-- END: row_all -->
+<!-- END: data -->
+<!-- BEGIN: empty -->Данных нет<!-- END: empty -->
+</div>
+<!-- END: shipment -->
+
+
+
+
+
+<!-- BEGIN: contry -->
+<select name="{D.name}" size="1">
+	<option value="{D.value}">не выбрана</option>
+	<!-- BEGIN: option --><option value="{D.value}" {D.selected}>{D.text}</option><!-- END: option -->
+</select>
+<!-- END: contry -->
+
+
+<!-- BEGIN: city -->
+<select name="{D.name}" size="1" onchange="loadCity('');">
+	<option value="{D.value}">не выбрана</option>
+	<!-- BEGIN: option --><option value="{D.value}" {D.selected}>{D.text}</option><!-- END: option -->
+</select>
+<!-- END: city -->
+
+
+<!-- BEGIN: view -->
+	<!-- BEGIN: shipment -->
+ID:&nbsp;{D.id}<br>
+Дата:&nbsp;{D.created_at}<br>
+№:&nbsp;{D.code}<br>
+<div style="clear: both;">
+	<div style="width: 49%; float: left;">
+		<fieldset>
+			<legend>Отправитель</legend>
+			Компания:&nbsp;{D.sender_company}<br>
+			Контактное лицо:&nbsp;{D.sender_person}<br>
+			Адрес:&nbsp;{D.sender_zip}, {D.sender_contry}, {D.sender_city}, {D.sender_address}<br>
+			{D.sender_comment}<br>
+		</fieldset>
+	</div>
+	<div style="width: 49%; float: right;">
+		<fieldset>
+			<legend>Получатель</legend>
+			Компания:&nbsp;{D.receiver_company}<br>
+			Контактное лицо:&nbsp;{D.receiver_person}<br>
+			Адрес:&nbsp;{D.receiver_zip}, {D.receiver_contry}, {D.receiver_city}, {D.receiver_address}<br>
+			{D.receiver_comment}<br>
+		</fieldset>
+	</div>
+</div>
+<hr class="clear">
+<div style=" float: left;">
+	<fieldset style="display: inline;">
+		<legend>Посылка</legend>
+		<!-- BEGIN: type_papers -->Тип:&nbsp;документы<br><!-- END: type_papers -->
+		<!-- BEGIN: type_luggage -->Тип:&nbsp;груз недокументарного характера<br><!-- END: type_luggage -->
+		<!-- BEGIN: speed_normal -->Скорость:&nbsp;нормальная<br><!-- END: speed_normal -->
+		<!-- BEGIN: speed_express -->Скорость:&nbsp;экспресс<br><!-- END: speed_express -->
+		<!-- BEGIN: fee_cash -->Оплата:&nbsp;наличными<br><!-- END: fee_cash -->
+		<!-- BEGIN: fee_cashless -->Оплата:&nbsp;безналичная<br><!-- END: fee_cashless -->
+		<!-- BEGIN: payer_sender -->Расчитывается:&nbsp;отправитель<br><!-- END: payer_sender -->
+		<!-- BEGIN: payer_receiver -->Расчитывается:&nbsp;получатель<br><!-- END: payer_receiver -->
+		Вес:&nbsp;{D.weight}<br>
+		Габариты:&nbsp;<span title="длина">{D.depth}</span>X<span title="ширина">{D.width}</span>X<span title="высота">{D.height}</span><br>
+		Количество:&nbsp;{D.count} шт.<br>
+		Цена:&nbsp;{D.price} грн.<br>
+	</fieldset>
+</div>
+		<!-- BEGIN: outsource -->
+<div style=" float: left; margin-left: 4px;">
+	<fieldset style="display: inline;">
+		<legend>Внешний заказ</legend>
+		{D.outsource_type}<br>
+		{D.outsource_number}<br>
+		{D.outsource_comment}<br>
+	</fieldset>
+</div>
+		<!-- END: outsource -->
+<div style="float: left; margin-left: 4px;">
+	<fieldset style="display: inline;">
+		<legend>Дополнительные услуги</legend>
+		<!-- BEGIN: additional_0 -->нет<br><!-- END: additional_0 -->
+		<!-- BEGIN: additional_1 -->1<br><!-- END: additional_1 -->
+		<!-- BEGIN: additional_2 -->2<br><!-- END: additional_2 -->
+		<!-- BEGIN: additional_3 -->3<br><!-- END: additional_3 -->
+		<!-- BEGIN: additional_4 -->4<br><!-- END: additional_4 -->
+		<!-- BEGIN: additional_5 -->5<br><!-- END: additional_5 -->
+	</fieldset>
+</div>
+<div style="float: left; margin-left: 4px;">
+	<fieldset style="display: inline;">
+		<legend>Коментарии</legend>
+		{D.comment}<br>
+	</fieldset>
+</div>
+<hr class="clear">
+<script type="text/javascript">
+<!--
+	Spoiler.init();
+//-->
+</script>
+	<!-- END: shipment -->
+<!-- END: view -->
+
+
+<!-- BEGIN: form -->
+	<!-- BEGIN: shipment -->
+<form method="post" action="" enctype="multipart/form-data" onsubmit="return formDo('{D.id.value}', 'shipment-{D.do}', this);">
+	<dl class="keyValue w128">
+	<!-- BEGIN: edit -->
+		<dt>ID:</dt><dd>{D.id.value}<input type="hidden" name="{D.id.name}" value="{D.id.value}" /></dd>
+		<dt>Дата:</dt><dd>{D.created_at}</dd>
+	<!-- END: edit -->
+		<dt>№:</dt><dd><input type="text" name="{D.code.name}" maxlength="{D.code.maxlength}" size="30" value="{D.code.value}" autocomplete="off" /><div class="hint">№xyz123</div></dd>
+		<dt>Состояние:</dt>
+		<dd>
+			<label><input type="radio" name="{D.state.name}" value="{D.state.value.canceled}" {D.state.checked.canceled} /> <img class="state canceled" src="/resource/empty.gif" alt="canceled" title="Отмененая" /></label>
+			<label><input type="radio" name="{D.state.name}" value="{D.state.value.none}" {D.state.checked.none} /> <img class="state none" src="/resource/empty.gif" alt="none" title="?" /></label>
+			<label><input type="radio" name="{D.state.name}" value="{D.state.value.queried}" {D.state.checked.queried} /> <img class="state queried" src="/resource/empty.gif" alt="queried" title="В очереди" /></label>
+			<label><input type="radio" name="{D.state.name}" value="{D.state.value.opened}" {D.state.checked.opened} /> <img class="state opened" src="/resource/empty.gif" alt="opened" title="Готов к отправке" /></label>
+			<label><input type="radio" name="{D.state.name}" value="{D.state.value.moving}" {D.state.checked.moving} /> <img class="state moving" src="/resource/empty.gif" alt="moving" title="В пути" /></label>
+			<label><input type="radio" name="{D.state.name}" value="{D.state.value.done}" {D.state.checked.done} /> <img class="state done" src="/resource/empty.gif" alt="done" title="Выполнен" /></label>
+		</dd>
+	</dl>
+	<hr class="clear">
+	<div style="clear: both;">
+		<div style="width: 49%; float: left;">
+			<fieldset>
+				<legend>Отправитель</legend>
+				<dl class="keyValue w200">
+					<dt>Компания:</dt><dd><input type="text" name="{D.sender_company.name}" maxlength="{D.sender_company.maxlength}" size="30" value="{D.sender_company.value}" autocomplete="off" /><div class="hint">ООО "Ромашка"</div></dd>
+					<dt>Контактное лицо:</dt><dd><input type="text" name="{D.sender_person.name}" maxlength="{D.sender_person.maxlength}" size="30" value="{D.sender_person.value}" autocomplete="off" /><div class="hint">Кизяк Василий Иванович</div></dd>
+				</dl>
+				<hr class="clear">
+				<fieldset>
+					<legend>Адрес</legend>
+					<dl class="keyValue w200">
+						<dt>индекс:</dt><dd><input type="text" name="{D.sender_zip.name}" maxlength="{D.sender_zip.maxlength}" size="10" value="{D.sender_zip.value}" autocomplete="off" /><div class="hint">01001</div></dd>
+						<dt>страна:</dt><dd><div id="contry-sender-div-{D.id.value}">loading ...</div></dd>
+						<dt>город:</dt><dd><div id="city-sender-div-{D.id.value}">loading ...</div></dd>
+						<dt>улица, дом, офис:</dt><dd><input type="text" name="{D.sender_address.name}" maxlength="{D.sender_address.maxlength}" size="30" value="{D.sender_address.value}" autocomplete="off" /><div class="hint">ул. Хрещатик, д. 1, оф. 20</div></dd>
+					</dl>
+					<hr class="clear">
+				</fieldset>
+				<div style="margin: 4px 0;" class="spoiler" title="Примечания">
+					<div style="float: right;"><input type="text" id="counter_sender_comment_{D.id.value}" class="counter" value="{D.sender_comment.length}" disabled="disabled" /></div>
+					<div style="margin-right: 100px;"><textarea name="{D.sender_comment.name}" style="height: 128px; width: 100%;" onkeyup="counter(this, 'counter_sender_comment_{D.id.value}', '{D.sender_comment.maxlength}');">{D.sender_comment.value}</textarea></div>
+					<div class="hint">Звонок не работает</div>
+				</div>
+			</fieldset>
+		</div>
+		<div style="width: 49%; float: right;">
+			<fieldset>
+				<legend>Получатель</legend>
+				<dl class="keyValue w200">
+					<dt>Компания:</dt><dd><input type="text" name="{D.receiver_company.name}" maxlength="{D.receiver_company.maxlength}" size="30" value="{D.receiver_company.value}" autocomplete="off" /><div class="hint">ООО "Ромашка"</div></dd>
+					<dt>Контактное лицо:</dt><dd><input type="text" name="{D.receiver_person.name}" maxlength="{D.receiver_person.maxlength}" size="30" value="{D.receiver_person.value}" autocomplete="off" /><div class="hint">Кизяк Василий Иванович</div></dd>
+				</dl>
+				<hr class="clear">
+				<fieldset>
+					<legend>Адрес</legend>
+					<dl class="keyValue w200">
+						<dt>индекс:</dt><dd><input type="text" name="{D.receiver_zip.name}" maxlength="{D.receiver_zip.maxlength}" size="10" value="{D.receiver_zip.value}" autocomplete="off" /><div class="hint">01001</div></dd>
+						<dt>страна:</dt><dd><div id="contry-receiver-div-{D.id.value}">loading ...</div></dd>
+						<dt>город:</dt><dd><div id="city-receiver-div-{D.id.value}">loading ...</div></dd>
+						<dt>улица, дом, офис:</dt><dd><input type="text" name="{D.receiver_address.name}" maxlength="{D.receiver_address.maxlength}" size="30" value="{D.receiver_address.value}" autocomplete="off" /><div class="hint">ул. Хрещатик, д. 1, оф. 20</div></dd>
+					</dl>
+					<hr class="clear">
+				</fieldset>
+				<div style="margin: 4px 0px;" class="spoiler" title="Примечания">
+					<div style="float: right;"><input type="text" id="counter_receiver_comment_{D.id.value}" class="counter" value="{D.receiver_comment.length}" disabled="disabled" /></div>
+					<div style="margin-right: 100px;"><textarea name="{D.receiver_comment.name}" style="height: 128px; width: 100%;" onkeyup="counter(this, 'counter_receiver_comment_{D.id.value}', '{D.receiver_comment.maxlength}');">{D.receiver_comment.value}</textarea></div>
+					<div class="hint">Звонок не работает</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+	<hr class="clear">
+	<div style=" float: left;">
+		<fieldset style="display: inline;">
+			<legend>Посылка</legend>
+			<dl class="keyValue w128">
+				<dt>Тип:</dt>
+				<dd>
+					<select name="{D.type.name}" size="1">
+						<option value="none" {D.type.selected.none}>не выбран</option>
+						<option value="papers" {D.type.selected.papers}>документы</option>
+						<option value="luggage" {D.type.selected.luggage}>груз недокументарного характера</option>
+					</select>
+				</dd>
+				<dt>Скорость:</dt>
+				<dd>
+					<select name="{D.speed.name}" size="1">
+						<option value="none" {D.speed.selected.none}>не выбрана</option>
+						<option value="normal" {D.speed.selected.normal}>нормальная</option>
+						<option value="express" {D.speed.selected.express}>экспресс</option>
+					</select>
+				</dd>
+				<dt>Оплата:</dt>
+				<dd>
+					<select name="{D.fee.name}" size="1">
+						<option value="none" {D.fee.selected.none}>не выбрана</option>
+						<option value="cash" {D.fee.selected.cash}>наличными</option>
+						<option value="cashless" {D.fee.selected.cashless}>безналичная</option>
+					</select>
+				</dd>
+				<dt>Расчитывается:</dt>
+				<dd>
+					<select name="{D.payer.name}" size="1">
+						<option value="none" {D.payer.selected.none}>не выбрана</option>
+						<option value="sender" {D.payer.selected.sender}>отправитель</option>
+						<option value="receiver" {D.payer.selected.receiver}>получатель</option>
+					</select>
+				</dd>
+				<dt>Вес:</dt>
+				<dd>
+					<select name="{D.weight.name}" size="1">
+						<option value="{D.weight.value}"> - - - </option>
+						<!-- BEGIN: weight --><option value="{D.weight.value}" {D.weight.selected} {D.weight.disabled} {D.weight.style}>{D.weight.text}</option><!-- END: weight -->
+					</select>
+				</dd>
+				<dt>Габариты:</dt>
+				<dd><input type="text" name="{D.depth.name}" maxlength="{D.depth.maxlength}" size="4" value="{D.depth.value}" title="длина" autocomplete="off" />X<input type="text" name="{D.width.name}" maxlength="{D.width.maxlength}" size="4" value="{D.width.value}" title="ширина" autocomplete="off" />X<input type="text" name="{D.height.name}" maxlength="{D.height.maxlength}" size="4" value="{D.height.value}" title="высота" autocomplete="off" /></dd>
+				<dt>Количество:</dt>
+				<dd><input type="text" name="{D.count.name}" maxlength="{D.count.maxlength}" size="4" value="{D.count.value}" autocomplete="off" /></dd>
+				<dt>Цена:</dt>
+				<dd><input type="text" name="{D.price.name}" maxlength="{D.price.maxlength}" size="14" value="{D.price.value}" autocomplete="off" /></dd>
+			</dl>
+		</fieldset>
+	</div>
+	<!-- BEGIN: outsource -->
+	<div style=" float: left; margin-left: 4px;">
+		<fieldset style="display: inline;">
+			<legend>Внешний заказ</legend>
+			<dl class="keyValue w64">
+				<dt>&nbsp;</dt>
+				<dd>
+					<select name="{D.outsource_type.name}" style="width: 128px;">
+						<option value="none" {D.outsource_type.selected.none}>-</option>
+						<option value="DHL" {D.outsource_type.selected.DHL}>DHL</option>
+						<option value="UPS" {D.outsource_type.selected.UPS}>UPS</option>
+						<option value="TNT" {D.outsource_type.selected.TNT}>TNT</option>
+						<option value="FedEx" {D.outsource_type.selected.FedEx}>FedEx</option>
+						<option value="Aramex" {D.outsource_type.selected.Aramex}>Aramex</option>
+					</select>
+				</dd>
+				<dt>№:</dt>
+				<dd><input type="text" name="{D.outsource_number.name}" maxlength="{D.outsource_number.maxlength}" size="30" value="{D.outsource_number.value}" autocomplete="off" /></dd>
+			</dl>
+			<hr class="clear">
+			<div style="margin: 4px 0px;" class="spoiler" title="Примечания">
+				<div style="float: right;"><input type="text" id="counter_outsource_comment_{D.id.value}" class="counter" value="{D.outsource_comment.length}" disabled="disabled" /></div>
+				<div style="margin-right: 100px;"><textarea name="{D.outsource_comment.name}" style="height: 128px; width: 100%;" onkeyup="counter(this, 'counter_outsource_comment_{D.id.value}', '{D.outsource_comment.maxlength}');">{D.outsource_comment.value}</textarea></div>
+				<div class="hint">Звонок не работает</div>
+			</div>
+		</fieldset>
+	</div>
+	<!-- END: outsource -->
+	<div style="float: left; margin-left: 4px;">
+		<fieldset style="display: inline;">
+			<legend>Дополнительные услуги</legend>
+			<label><input type="checkbox" name="{D.additional.0.name}" value="{D.additional.0.value}" {D.additional.0.checked}> 1</label><br>
+			<label><input type="checkbox" name="{D.additional.1.name}" value="{D.additional.1.value}" {D.additional.1.checked}> 2</label><br>
+			<label><input type="checkbox" name="{D.additional.2.name}" value="{D.additional.2.value}" {D.additional.2.checked}> 3</label><br>
+			<label><input type="checkbox" name="{D.additional.3.name}" value="{D.additional.3.value}" {D.additional.3.checked}> 4</label><br>
+			<label><input type="checkbox" name="{D.additional.4.name}" value="{D.additional.4.value}" {D.additional.4.checked}> 5</label><br>
+		</fieldset>
+	</div>
+	<div style="float: left; margin-left: 4px;">
+		<fieldset style="display: inline;">
+			<legend>Коментарии</legend>
+			<div style="margin: 4px 0px; width: 512px;" class="spoiler" title="Примечания">
+				<div style="float: right;"><input type="text" id="counter_comment_{D.id.value}" class="counter" value="{D.comment.length}" disabled="disabled" /></div>
+				<div style="margin-right: 100px;"><textarea name="{D.comment.name}" style="height: 128px; width: 100%;" onkeyup="counter(this, 'counter_comment_{D.id.value}', '{D.comment.maxlength}');">{D.comment.value}</textarea></div>
+				<div class="hint">Звонок не работает</div>
+			</div>
+		</fieldset>
+	</div>
+	<hr class="clear">
+	<div style="text-align: center;">
+		<input type="submit" value="OK">
+		<input type="reset" value="Reset">
+	</div>
+</form>
+				<input type="hidden" name="{D.sender_contry.name}" value="{D.sender_contry.value}" />
+				<input type="hidden" name="{D.sender_city.name}" value="{D.sender_city.value}" />
+				<input type="hidden" name="{D.receiver_contry.name}" value="{D.receiver_contry.value}" />
+				<input type="hidden" name="{D.receiver_city.name}" value="{D.receiver_city.value}" />
+<script type="text/javascript">
+<!--
+	Spoiler.init();
+	// sender
+	Ajax.get({ c:[['ajax', 'contry'], ['name', '{D.sender_contry.name}'], ['value', '{D.sender_contry.value}']], t:function (t) { $inner('contry-sender-{D.id.value}', t, false); }, e:function (t) { alert('error'); } });
+	Ajax.get({ c:[['ajax', 'city'], ['name', '{D.sender_city.name}'], ['value[contry]', '{D.sender_contry.value}'], ['value[city]', '{D.sender_city.value}']], t:function (t) { $inner('city-sender-{D.id.value}', t, false); }, e:function (t) { alert('error'); } });
+	// receiver
+	Ajax.get({ c:[['ajax', 'contry'], ['name', '{D.receiver_contry.name}'], ['value', '{D.receiver_contry.value}']], t:function (t) { $inner('contry-receiver-{D.id.value}', t, false); }, e:function (t) { alert('error'); } });
+	Ajax.get({ c:[['ajax', 'city'], ['name', '{D.receiver_city.name}'], ['value[contry]', '{D.receiver_contry.value}'], ['value[city]', '{D.receiver_city.value}']], t:function (t) { $inner('city-receiver-{D.id.value}', t, false); }, e:function (t) { alert('error'); } });
+//-->
+</script>
+	<!-- END: shipment -->
+
+
+
+
+<div style="clear: both; margin: 16px 8px 8px; padding: 8px 16px; width: 300px;">
+	<div title="add" class="spoiler" style="border: 1px gray solid;">
+		<form method="post" action="" onsubmit="return formSubmit(this);">
+			<dl>
+				<dt>ID</dt>
+				<dd><input type="text" name="a[id]" size="30" maxlength="30" value="{D.id}"></dd>
+				<dt>Место</dt>
+				<dd><input type="text" name="a[location]" size="30" maxlength="255" value="{D.location}"></dd>
+				<dt>примечание</dt>
+				<dd><input type="text" name="a[comment]" size="30" maxlength="255" value="{D.comment}"></dd>
+			</dl>
+			<div style="margin-top: 8px; text-align: center;"><input type="submit" value="добавить">&nbsp;<input type="reset" value="отменить"></div>
+		</form>
+	</div>
+</div>
+
+	<!-- BEGIN: edit -->
+<div style="border: 1px gray solid; clear: both; margin: 16px 8px 8px; padding: 8px 16px; width: 300px;">
+	<form method="post" action="" onsubmit="return formSubmit(this);">
+		<dl>
+			<dt>ID</dt>
+			<dd>{D.id}<input type="hidden" name="a[id]" value="{D.id}"></dd>
+			<dt>№</dt>
+			<dd>{D.hid}<input type="hidden" name="a[hid]" value="{D.hid}"></dd>
+			<dt>Дата</dt>
+			<dd>{D.created_at}</dd>
+			<dt>Место</dt>
+			<dd><input type="text" name="a[location]" size="30" maxlength="255" value="{D.location}"></dd>
+			<dt>примечание</dt>
+			<dd><input type="text" name="a[comment]" size="30" maxlength="255" value="{D.comment}"></dd>
+		</dl>
+		<div style="margin-top: 8px; text-align: center;"><input type="submit" value="изменить">&nbsp;<input type="reset" value="отменить"></div>
+	</form>
+</div>
+	<!-- END: edit -->
+<!-- END: form -->

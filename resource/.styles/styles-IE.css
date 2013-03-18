@@ -1,0 +1,11 @@
+
+dl.form  br { clear: both; }
+dl.form  dd { margin-bottom: 8px; margin-left: 128px; overflow: hidden; text-align: left; }
+dl.form  dt { clear: both; float: left; overflow: hidden; text-align: right; width: 128px; }
+dl.form  dd  input, dl.form  dd  textarea { margin-left: -128px; }
+/** /
+dl.form  dd { margin: -21px 0px 0px 128px; min-height: 20px; overflow: hidden; }
+dl.form  dt { height: 20px; margin: 1px 0px; overflow: hidden; width: 128px; }
+/**/
+
+fieldset.groupbox  legend { padding: 0px 8px; }

@@ -1,0 +1,17 @@
+
+/* SPOILER */
+div.spoiler, div.SPOILER { background: #F6F6F6; overflow: auto; }
+div.SPOILER  a.spoiler-link { text-decoration: none; }
+div.SPOILER  a.spoiler-link  div.spoiler-title
+{
+	background: #C9C9C9;
+	color: white;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	margin: 2px;
+	padding: 2px 32px;
+}
+div.SPOILER  div.spoiler-content { display: none; margin: 4px 8px; padding: 0px; }
+div.SPOILER.expanded  div.spoiler-content { display: block; }

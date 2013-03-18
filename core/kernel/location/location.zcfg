@@ -1,0 +1,9 @@
+
+%cfg% = "%core-config%.location"
+
+%cfg%.method  = "[n]:"
+#%cfg%.?domain  = "[n]:"
+%cfg%.?request = "[s]: tracking.php"
+#%cfg%.?query  = "[n]:"
+#%cfg%.?post   = "[n]:"
+#%cfg%.anchor  = "[n]:"

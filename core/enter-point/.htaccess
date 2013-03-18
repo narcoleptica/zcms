@@ -1,0 +1,13 @@
+<Files ".htaccess">
+	deny from all
+</Files>
+
+
+Options  -Indexes
+Options  +FollowSymlinks
+
+
+RewriteEngine  on
+RewriteBase  /core/enter-point/
+RewriteRule  ^(?:ajax|css|html|js|resource)[\.]php([\?]|$)  -  [L]
+RewriteRule  ^(!:ajax|css|html|js|resource)[\.]php([\?]|$)  /core/error-point/404.php  [L,QSA]
