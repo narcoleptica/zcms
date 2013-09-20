@@ -125,3 +125,55 @@ RewriteRule  ^.*$  html.php  [L,QSA]
 
 RewriteRule  ^.*$  404.php  [L,QSA]
 
+
+
+
+
+
+
+
+
+
+
+
+<Files ".htaccess">
+	deny from all
+</Files>
+
+
+Options  -Indexes  +FollowSymlinks
+
+
+#################
+#  mod_rewrire  #
+#################
+RewriteEngine  On
+RewriteBase  /
+
+# error points
+RewriteRule  ^([\d]{3})[\.]html(?:[\?].*)?$  core/error-point/$1.php  [L,QSA]
+
+# root point
+RewriteRule  ^(?:[\?].*)?$  core/enter-point/browser-check.php  [L,QSA]
+
+# enter points
+RewriteRule  ^(ajax|css|html|js|resource|wap)[\/](.*)(?:[\?].*)?$  core/enter-point/$1.php?path=$2  [L,QSA]
+
+# data point
+RewriteRule  ^(.*[\/])(?:[\?].*)?$  /html/$1index.html  [L,QSA]
+RewriteRule  ^((?:[^\/]*[\/])[^\/\.]*)(?:[\?].*)?$  /html/$1/index.html  [L,QSA]
+
+RewriteRule  ^(.*[\.]ajax)(?:[\?].*)?$  /ajax/$1  [L,QSA]
+RewriteRule  ^(.*[\.]css)(?:[\?].*)?$  /css/$1  [L,QSA]
+RewriteRule  ^(.*[\.]html)(?:[\?].*)?$  /html/$1  [L,QSA]
+RewriteRule  ^(.*[\.]js)(?:[\?].*)?$  /js/$1  [L,QSA]
+
+RewriteRule  ^(.*[\.]html)(?:[\?].*)?$  /html/$1  [L,QSA]
+RewriteRule  ^(.*[\/])(?:[\?].*)?$  /html/$1index.html  [L,QSA]
+RewriteRule  ^((?:[^\/]*[\/])[^\/\.]*)(?:[\?].*)?$  /html/$1/index.html  [L,QSA]
+
+# unknown points
+RewriteRule  ^(.*)$  /403.html?path=$1  [L]
+
+
+
