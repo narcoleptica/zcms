@@ -1,4 +1,36 @@
-<? //$L->set('http://nets2/t/a.js?x=1&y[x]=2');
+<html>
+
+<head>
+	<title>js</title>
+</head>
+
+<body>
+
+js.php
+
+<pre>
+SERVER:
+<?var_dump($_SERVER);?>
+
+GET:
+<?var_dump($_GET);?>
+
+POST:
+<?var_dump($_POST);?>
+
+ENV:
+<?var_dump($_ENV);?>
+</pre>
+
+</body>
+
+</html>
+
+
+<?
+exit;
+
+//$L->set('http://nets2/t/a.js?x=1&y[x]=2');
 
 try
 {

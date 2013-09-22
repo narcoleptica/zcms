@@ -1,13 +1,30 @@
+
 <Files ".htaccess">
 	deny from all
 </Files>
 
 
-Options  -Indexes
-Options  +FollowSymlinks
+Options  -Indexes +FollowSymlinks
 
 
-RewriteEngine  on
-RewriteBase  /core/error-point/
-RewriteRule  ^(?:403|404|500)[\.]php([\?]|$)  -              [L]  # 403.php, 404.php, 500.php
-RewriteRule  ^(?:403|404|500)[\.]php([\?]|$)  404.php  [L,QSA]
+#################
+#  error point  #
+#################
+
+RewriteEngine  On
+RewriteBase  /core/error-point
+
+# hide CORE structure
+RewriteCond  %{ENV:REDIRECT_STATUS}  ^$  [NC]
+RewriteRule  ^(.*)$  /403.html?path=$1  [L,QSA]
+
+# unallowed error points
+RewriteCond  %{SCRIPT_FILENAME}  !-f
+RewriteRule  ^(.*)$  /403.html?path=$1  [L,QSA]
+
+
+# allowed error points (redirect already done in "unallowed error points")
+#RewriteRule  ^403[\.]php(?:[\?].*)?$                     -  [L,QSA]
+#RewriteRule  ^404[\.]php(?:[\?].*)?$                     -  [L,QSA]
+#RewriteRule  ^500[\.]php(?:[\?].*)?$                     -  [L,QSA]
+#RewriteRule  ^browser[\-]error[\.]php(?:[\?].*)?$        -  [L,QSA]

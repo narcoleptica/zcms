@@ -1,16 +1,12 @@
-<?php
-
-?>
-
 <html>
 
 <head>
-	<title>500</title>
+	<title>wap</title>
 </head>
 
 <body>
 
-500.php
+wap.php
 
 <pre>
 SERVER:

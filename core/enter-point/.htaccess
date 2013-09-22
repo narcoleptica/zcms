@@ -1,13 +1,33 @@
+
 <Files ".htaccess">
 	deny from all
 </Files>
 
 
-Options  -Indexes
-Options  +FollowSymlinks
+Options  -Indexes +FollowSymlinks
 
 
-RewriteEngine  on
-RewriteBase  /core/enter-point/
-RewriteRule  ^(?:ajax|css|html|js|resource)[\.]php([\?]|$)  -  [L]
-RewriteRule  ^(!:ajax|css|html|js|resource)[\.]php([\?]|$)  /core/error-point/404.php  [L,QSA]
+#########################
+#  enter & error point  #
+#########################
+
+RewriteEngine  On
+RewriteBase  /core/enter-point
+
+# hide CORE structure
+RewriteCond  %{ENV:REDIRECT_STATUS}  ^$  [NC]
+RewriteRule  ^(.*)$  /403.html?path=$1  [L,QSA]
+
+# unallowed enter points
+RewriteCond  %{SCRIPT_FILENAME}  !-f
+RewriteRule  ^(.*)$  /403.html?path=$1  [L,QSA]
+
+
+# allowed enter points (redirect already done in "unallowed enter points")
+#RewriteRule  ^ajax[\.]php(?:[\?].*)?$                   -  [L,QSA]
+#RewriteRule  ^browser[\-]check[\.]php(?:[\?].*)?$       -  [L,QSA]
+#RewriteRule  ^css[\.]php(?:[\?].*)?$                    -  [L,QSA]
+#RewriteRule  ^html[\.]php(?:[\?].*)?$                   -  [L,QSA]
+#RewriteRule  ^js[\.]php(?:[\?].*)?$                     -  [L,QSA]
+#RewriteRule  ^resource[\.]php(?:[\?].*)?$               -  [L,QSA]
+#RewriteRule  ^wap[\.]php(?:[\?].*)?$                    -  [L,QSA]

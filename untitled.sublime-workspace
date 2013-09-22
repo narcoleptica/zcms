@@ -1,0 +1,282 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"te",
+				"text-bottom"
+			],
+			[
+				"fo",
+				"font-size"
+			],
+			[
+				"h",
+				"height"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"bo",
+				"border"
+			],
+			[
+				"pre",
+				"preg_replace"
+			],
+			[
+				"htm",
+				"htm"
+			],
+			[
+				"Rewrite",
+				"RewriteRule"
+			],
+			[
+				"bu",
+				"buff"
+			],
+			[
+				"buff",
+				"buffer"
+			],
+			[
+				"sys",
+				"system"
+			],
+			[
+				"print",
+				"print"
+			],
+			[
+				"arra",
+				"array"
+			],
+			[
+				"array_wa",
+				"array_walk_recursive"
+			],
+			[
+				"call_user_func",
+				"call_user_func_array"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 27.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 153.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/web/www/l.github/zcms/.htaccess",
+		"/Users/zanner/debug/py/pascal-l1.py",
+		"/Users/zanner/Documents/my/KPI/group-lists/course-2-2013.json",
+		"/web/www/l.temp/z.mafia/index.html",
+		"/Users/zanner/Documents/my/KPI/group-lists/course-1-2013.json",
+		"/web/www/l.zcms/.htaccess",
+		"/web/www/l.zcms/~old/htaccess-old.txt",
+		"/web/www/l.zcms/htaccess-old.txt",
+		"/web/www/l.zcms/core/.htaccess",
+		"/web/www/l.zcms/core/error-point/.htaccess",
+		"/web/www/l.zcms/core/enter-point/.htaccess",
+		"/web/www/l.zcms/core/enter-point/browser-check.php",
+		"/web/www/l.zcms/core/enter-point/html.php",
+		"/web/www/l.zcms/core/enter-point/ajax.php",
+		"/web/www/l.zcms/core/enter-point/css.php",
+		"/web/www/l.zcms/core/enter-point/js.php",
+		"/web/www/l.zcms/core/enter-point/wap.php",
+		"/web/www/l.zcms/core/enter-point/resource.php",
+		"/web/www/l.zcms/core/error-point/403.php",
+		"/web/www/l.zcms/core/error-point/404.php",
+		"/web/www/l.zcms/core/error-point/500.php",
+		"/web/www/l.temp/z.cms/.htaccess",
+		"/web/www/l.temp/z.cms/core/.htaccess",
+		"/web/www/l.temp/z.cms/core/error-point/.htaccess",
+		"/web/www/l.temp/z.cms/core/enter-point/.htaccess",
+		"/web/www/l.temp/z.cms/-.htaccess",
+		"/Applications/Sublime Text 2.app/Contents/Info.plist",
+		"/Users/zanner/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/zanner/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/zanner/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/zanner/Library/Application Support/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
+		"/Users/zanner/Library/Application Support/Sublime Text 2/Packages/User/JSON.sublime-settings",
+		"/web/www/l.temp/z.cms/index.php",
+		"/web/www/l.temp/z.mafia/index.php",
+		"/web/www/l.final/ajax.js/ajax-2.js",
+		"/web/www/l.final/ajax.js/ajax.js",
+		"/web/www/l.temp/z.mafia/json.js",
+		"/web/www/l.temp/z.mafia/mafia.js",
+		"/Users/zanner/Downloads/Zend Framework/Zend Framework-2.2.0/ZendFramework-2.2.0/INSTALL.md",
+		"/Users/zanner/Dropbox/www/tnx.php",
+		"/Volumes/zanner.org.ua/www/shram.kiev.ua/mycode/160519821982/tnx.php",
+		"/web/www/l.temp/1/tnx.php",
+		"/Users/zanner/Desktop/tnx.php",
+		"/web/www/z.mafia/mafia.js",
+		"/web/www/z.mafia/index.php",
+		"/Users/zanner/SVN/github.com/zmysql/README.md",
+		"/web/www/l.temp/zcms/.htaccess",
+		"/web/www/l.temp/zcms/index.php",
+		"/web/www/l.test/zcms/.htaccess",
+		"/Volumes/home/www-bak/zeratool-mysql-dump-xxx.sql",
+		"/Volumes/home/www-bak/zeratool-mysql-dump-nets.sql",
+		"/Users/zanner/Downloads/domjudge-3.3.4/judge/compile_c.sh",
+		"/Users/zanner/Downloads/DBinfo.txt",
+		"/web/www/l.test/bomberman/dynamic.php",
+		"/Users/zanner/Desktop/sait2013/untitled.tex",
+		"/web/www/l.project/bizpost.l/ru.bizpost.com.ua/templates/main/index.htm",
+		"/Users/zanner/Desktop/sait2013/kk.tex",
+		"/Users/zanner/Desktop/sait2013/sait2013/saittr13.cls"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			" ",
+			"{\n	",
+			"\n{\\n",
+			"\n{\\\\n",
+			"\n{\\t",
+			"\n\\n\\t",
+			"\n	",
+			"  ",
+			".	",
+			". ",
+			"citizen",
+			"        ",
+			"\"",
+			"[\\.]",
+			"ajax",
+			"file",
+			"exten",
+			"fsockopen",
+			"!!!",
+			"proxy",
+			"curl",
+			"proxy",
+			"sock"
+		],
+		"highlight": true,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"'"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/web/www/l.temp/z.cms/untitled.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 121.0,
+	"status_bar_visible": true
+}

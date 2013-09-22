@@ -1,12 +1,27 @@
+
 <Files ".htaccess">
 	deny from all
 </Files>
 
 
-Options  -Indexes
-Options  +FollowSymlinks
+Options  -Indexes +FollowSymlinks
 
 
-RewriteEngine  on
+###########
+#  /core  #
+###########
+
+RewriteEngine  On
 RewriteBase  /core
-RewriteRule  ^.*$  /core/error-point/404.php  [L,QSA]
+
+# hide CORE structure
+RewriteCond  %{ENV:REDIRECT_STATUS}  ^$  [NC]
+RewriteRule  ^(.*)$  /403.html?path=$1  [L,QSA]
+
+# unallowed /core
+RewriteRule  ^(.*)$  /403.html?path=$1  [L,QSA]
+
+
+# unallowed /core
+#RewriteCond  %{SCRIPT_FILENAME}  !-f
+#RewriteRule  ^(.*)$  /403.html?path=$1  [L,QSA]

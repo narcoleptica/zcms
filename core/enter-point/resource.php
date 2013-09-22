@@ -1,22 +1,27 @@
+<html>
+
+<head>
+	<title>resource</title>
+</head>
+
+<body>
+
+resource.php
+
 <pre>
-<?
-print 'resource.php' . "\n\n\n";
+SERVER:
+<?var_dump($_SERVER);?>
 
-print '$_SERVER:' . "\n";
-print_r($_SERVER);
-print "\n\n";
+GET:
+<?var_dump($_GET);?>
 
-print '$_ENV:' . "\n";
-print_r($_ENV);
-print "\n\n";
+POST:
+<?var_dump($_POST);?>
 
-print '$_GET:' . "\n";
-print_r($_GET);
-print "\n\n";
-
-print '$_POST:' . "\n";
-print_r($_POST);
-print "\n\n";
-
-?>
+ENV:
+<?var_dump($_ENV);?>
 </pre>
+
+</body>
+
+</html>
